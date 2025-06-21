@@ -61,8 +61,8 @@ run:
 	uv run python main.py
 
 # Development setup
-dev-setup: install-dev
-	uv run pre-commit install
+# dev-setup: install-dev
+#	uv run pre-commit install
 
 # Check code quality
 check: lint test

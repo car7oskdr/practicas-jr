@@ -13,27 +13,44 @@ class TestApp(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.app = App("Test App")
+        self.app = App()
 
     def test_app_initialization(self):
         """Test app initialization."""
-        self.assertEqual(self.app.name, "Test App")
-        self.assertIsNotNone(self.app.logger)
+        app = App()
+        self.assertIsNotNone(app.logger)
+        self.assertEqual(app.logger.name, "App")
 
-    def test_get_name(self):
-        """Test get_name method."""
-        self.assertEqual(self.app.get_name(), "Test App")
+    def test_setup_logging(self):
+        """Test logging setup."""
+        logger = self.app._setup_logging()
+        self.assertIsNotNone(logger)
+        self.assertEqual(logger.name, "App")
 
+    @patch("builtins.input")
     @patch("builtins.print")
-    def test_run(self, mock_print):
-        """Test run method."""
-        self.app.run()
-        mock_print.assert_called_once_with("Welcome to Test App!")
+    def test_run_with_suma_option(self, mock_print, mock_input):
+        """Test run method with suma option."""
+        # Simular entrada del usuario:
+        # opción 1 (suma), números 5 y 3, luego salir
+        mock_input.side_effect = ["1", "5", "3", "5"]
 
-    def test_default_app_name(self):
-        """Test default app name."""
-        default_app = App()
-        self.assertEqual(default_app.name, "Python App")
+        self.app.run()
+
+        # Verificar que se llamó a print con el resultado correcto
+        mock_print.assert_any_call("El resultado de la suma es: 8")
+
+    @patch("builtins.input")
+    @patch("builtins.print")
+    def test_run_with_invalid_option(self, mock_print, mock_input):
+        """Test run method with invalid option."""
+        # Simular entrada inválida, luego salir
+        mock_input.side_effect = ["6", "5"]
+
+        self.app.run()
+
+        # Verificar que se mostró el mensaje de opción inválida
+        mock_print.assert_any_call("Opcion no valida")
 
 
 if __name__ == "__main__":
