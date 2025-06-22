@@ -128,3 +128,6 @@ exclude_lines = [
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
 ] 
+
+[project.scripts]
+main = "transcript_analytics.main:main"
