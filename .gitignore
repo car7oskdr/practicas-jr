@@ -184,3 +184,4 @@ config.json
 *.log
 temp/
 tmp/
+.aider*

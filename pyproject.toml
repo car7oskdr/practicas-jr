@@ -41,8 +41,6 @@ dev = [
     "isort>=5.0.0",
 ]
 
-main = "transcript_analytics.main:main"
-
 [dependency-groups]
 dev = [
     "black>=24.8.0",
@@ -52,6 +50,9 @@ dev = [
     "pytest>=8.3.5",
     "pytest-cov>=5.0.0",
 ]
+
+[project.scripts]
+main = "src.main:main"
 
 [tool.black]
 line-length = 88
@@ -127,6 +128,3 @@ exclude_lines = [
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
 ] 
-
-[project.scripts]
-main = "transcript_analytics.main:main"
