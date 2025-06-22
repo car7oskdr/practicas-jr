@@ -41,8 +41,7 @@ dev = [
     "isort>=5.0.0",
 ]
 
-[project.scripts]
-python-app = "main:main"
+main = "transcript_analytics.main:main"
 
 [dependency-groups]
 dev = [
